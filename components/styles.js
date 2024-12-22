@@ -39,21 +39,14 @@ const styles = StyleSheet.create({
   },
 
   // Key which is being pressed
-  activeKey: {
-    backgroundColor: "#3ac8da",
-  },
-  activeAccidentalKey: {
-    borderWidth: 1, // Default border width
-    borderColor: "#fff", // Default border color
-    borderTopWidth: 1, // Top border width
-    borderTopColor: "#3ac8da", // Top border color override
-    height: "65%", // Height as a percentage
-  },
   activeNaturalKey: {
-    borderWidth: 1, // Border width
-    borderColor: "#3ac8da", // Border color
-    height: "98%", // Slight height reduction for "pushed-down" effect
+    backgroundColor: "rgb(184 184 184)",
   },
+
+  activeAccidentalKey: {
+    backgroundColor: "rgb(48 48 48)",
+  },
+
 
   disabledAccidentalKey: {
     borderWidth: 1,

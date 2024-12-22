@@ -5,7 +5,6 @@ import { StyleSheet } from 'react-native';
 
 export default function RecordingToolButton({children})
 {
-
     return(
         <View style={styles.buttonContainer}>
             <Text style={children === "●"? styles.recordingButton:styles.nonRecordingButton}>{children}</Text>
