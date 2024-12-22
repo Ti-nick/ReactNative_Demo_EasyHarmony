@@ -1,11 +1,11 @@
 import { Text, View } from 'react-native';
-// import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import { verticalScale} from 'react-native-size-matters';
 
 export default function MenuBarSection()
 {
     return(
-        <View style={{flex: 0.6, width: "20%", alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{color:"white", fontSize: 2.2}}>く</Text>
+        <View style={{flex: 0.6, justifyContent: "center"}}>
+            <Text style={{left: verticalScale(20), color:"white", fontSize: verticalScale(14)}}>く</Text>
         </View>
     )
 }

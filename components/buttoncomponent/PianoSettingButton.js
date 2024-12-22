@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet } from "react-native";
+import { verticalScale} from 'react-native-size-matters';
 
 export default function PianoSettingButton({children}){
     const buttonStyle = [
@@ -12,7 +13,7 @@ export default function PianoSettingButton({children}){
 
     return(
         <View style = {buttonStyle}>
-            <Text style = {{fontSize: 2.2, color: "white"}}>{children}</Text>
+            <Text style = {{fontSize: verticalScale(14), color: "white"}}>{children}</Text>
         </View>
     )
 }

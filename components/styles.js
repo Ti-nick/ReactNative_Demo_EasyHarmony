@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { moderateScale } from 'react-native-size-matters';
 
 const styles = StyleSheet.create({
   keyboardWrapper: {
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end", // Align note labels to the bottom
   },
   noteLabel: {
-    fontSize: 1.5,
+    fontSize: moderateScale(10, 0.7),
     textAlign: "center",
     textTransform: "capitalize", // Capitalize text
   },
