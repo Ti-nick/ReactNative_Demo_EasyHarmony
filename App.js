@@ -3,8 +3,19 @@ import MenuBarSection from './components/MenuBarSection'
 import NoteDisplaySection from './components/NoteDisplaySection';
 import PianoSection from './components/PianoSection';
 import RecordSection from './components/RecordSection';
+// import FirstAudioTest from './components/FirstAudioTest';
+
+// import { useState } from 'react';
 
 export default function App() {
+  // const [recording, setRecording] = useState();
+  // const [recordings, setRecordings] = useState([]);
+
+  // async function startRecording(){}
+  // async function stopRecording(){}
+  // function getDurationFormatted(milliseconds){  }
+  // function getRecordingLines(){}
+  // function clearRecordings(){}
 
   return(
     <SafeAreaView style={styles.sectionContainer}>
@@ -16,7 +27,9 @@ export default function App() {
       <PianoSection/>
       <RecordSection/>
 
-      <View style={{flex: 0.4}}></View>
+      <View style={{flex: 0.4}}>
+        {/* <FirstAudioTest/> */}
+      </View>
     </SafeAreaView>
   )
 }
