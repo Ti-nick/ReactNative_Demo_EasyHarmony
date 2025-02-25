@@ -3,7 +3,7 @@ import Keyboard from './Keyboard';
 import PianoSettingButton from './buttoncomponent/PianoSettingButton';
 import { useState, useEffect } from 'react';
 
-export default function PianoSection()
+export default function PianoSection({setNoteRecorder, songKey, setSongKey})
 {
     const [octave, setOctave] = useState(4);
 
@@ -33,15 +33,15 @@ export default function PianoSection()
                 </View>
                 
                 {/* Key Adjustment Section */}
-                <PianoSettingButton>Settings</PianoSettingButton>
+                <PianoSettingButton>{"Settings (Key: " + songKey + ")"}</PianoSettingButton>
             </View>
 
             {/* Piano Section */}
             <View style={{flex: 4.5, position: "relative", flexDirection: "row",}}>
-                <Keyboard octave={octave}/>
+                <Keyboard octave={octave} setNoteRecorder={setNoteRecorder}/>
             </View>
             <View style={{flex: 4.5, position: "relative", flexDirection: "row",}}>
-                <Keyboard octave={octave + 1}/>
+                <Keyboard octave={octave + 1} setNoteRecorder={setNoteRecorder}/>
             </View>
             
         </View>
