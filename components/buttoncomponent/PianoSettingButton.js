@@ -1,20 +1,31 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { StyleSheet } from "react-native";
+import { Text, View, Pressable, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
 import { verticalScale} from 'react-native-size-matters';
 
-export default function PianoSettingButton({children}){
+export default function PianoSettingButton({children, onPress}){
+    const [isPress, setIsPress] = useState(false);
+
     const buttonStyle = [
-        styles.keyboardSettingButton,
+        isPress? styles.keyboardSettingButtonPressed:styles.keyboardSettingButton,
         children === "-"? styles.leftButton:null,
         children === "+"? styles.rightButton:null,
         children === "Settings"? styles.settingsButton:null,
     ];
 
+    // useEffect(() => {
+    //     console.log(isPress);
+    // });
+
     return(
-        <View style = {buttonStyle}>
-            <Text style = {{fontSize: verticalScale(14), color: "white"}}>{children}</Text>
-        </View>
+        <Pressable 
+            onPress={onPress}
+            onPressIn={() => setIsPress(true)}
+            onPressOut={() => setIsPress(false)}
+            style = {buttonStyle}
+        >
+                <Text style = {{fontSize: verticalScale(14), color: "white"}}>{children}</Text>
+        </Pressable>
     )
 }
 
@@ -25,6 +36,13 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent: 'center', 
         backgroundColor: "rgb(24,24,24)", 
+    },
+    keyboardSettingButtonPressed:{
+        flex: 1, 
+        height: "100%", 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        backgroundColor: "rgb(0, 0, 0)", 
     },
     leftButton:{
         marginLeft: 10, 
