@@ -3,6 +3,7 @@ import MenuBarSection from './components/MenuBarSection'
 import NoteDisplaySection from './components/NoteDisplaySection';
 import PianoSection from './components/PianoSection';
 import RecordSection from './components/RecordSection';
+import NotePlayer from './components/NotePlayer';
 
 export default function App() {
 
@@ -15,7 +16,7 @@ export default function App() {
       <NoteDisplaySection/>
       <PianoSection/>
       <RecordSection/>
-
+      <NotePlayer/>
       <View style={{flex: 0.4}}></View>
     </SafeAreaView>
   )
