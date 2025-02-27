@@ -95,6 +95,7 @@ const noteToFile = {
 
 export default function NotePlayer(){
     const [sound, setSound] = useState();
+    const notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
 
     async function playSound(note) {
 
@@ -121,10 +122,17 @@ export default function NotePlayer(){
             }
             : undefined;
     }, [sound]);
+
+    async function playNotesSequentially(notes) {
+      for (const note of notes) {
+          await playSound(note);
+          await new Promise(resolve => setTimeout(resolve, 700)); // Wait for 1 second
+      }
+  }
     
       return (
         <View style={styles.container}>
-          <Button title="Play Sound" onPress={() => {playSound("D5")}} />
+          <Button title="Play Sound" onPress={() => {playNotesSequentially(notes)}} />
         </View>
       );
 }
