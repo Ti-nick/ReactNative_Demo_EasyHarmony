@@ -10,11 +10,21 @@ export default function PianoSection({setNoteRecorder, songKey, setSongKey})
     const octaveHandler = (event) => {
         if(event === "+")
         {
-            setOctave(octave + 1);
+            if(octave < 6)
+            {
+                setOctave(octave + 1);
+            }else{
+                return;
+            }
         }
         else if(event === "-")
         {
-            setOctave(octave - 1);
+            if(octave > 1)
+            {
+                setOctave(octave - 1);
+            }else{
+                return;
+            }
         }
     }
 
