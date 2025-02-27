@@ -2,12 +2,12 @@ import { Text, View } from 'react-native';
 import { verticalScale} from 'react-native-size-matters';
 import { StyleSheet } from 'react-native';
 
-export default function NoteMonitor({noteRecorder})
+export default function NoteMonitor({displayNotes})
 {
     return(
         <View style={styles.monitorContainer}>
             <Text style={styles.text} numberOfLines={1} ellipsizeMode='clip'>
-                {noteRecorder.map((note, index) => (
+                {displayNotes.map((note, index) => (
                     <Text key={index}>{note + ", "}</Text>
                 ))}
             </Text>

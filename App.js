@@ -9,11 +9,13 @@ import { useState, useEffect } from 'react';
 export default function App() {
 
   const [noteRecorder, setNoteRecorder] = useState([]);
+  const [noteConverter, setNoteConverter] = useState([]);
   const [songKey, setSongKey] = useState("C");
+  const [songMajorMinor, setSongMajorMinor] = useState("Major");
 
-  useEffect(() => {
-    console.log(noteRecorder);
-  }, [noteRecorder]);
+  // useEffect(() => {
+  //   setNoteConverter(noteRecorder);
+  // }, [noteRecorder]);
 
   return(
     <SafeAreaView style={styles.sectionContainer}>
@@ -21,9 +23,9 @@ export default function App() {
       <StatusBar barStyle="light-content" backgroundColor="rgb(42, 40, 40)" />
 
       <MenuBarSection/>
-      <NoteDisplaySection noteRecorder={noteRecorder} songKey={songKey}/>
+      <NoteDisplaySection noteRecorder={noteRecorder} noteConverter={noteConverter} setNoteConverter={setNoteConverter} songKey={songKey} songMajorMinor={songMajorMinor}/>
       <PianoSection setNoteRecorder={setNoteRecorder} songKey={songKey} setSongKey={setSongKey}/>
-      <RecordSection/>
+      <RecordSection setNoteRecorder={setNoteRecorder}/>
       <NotePlayer/>
       <View style={{flex: 0.4}}></View>
     </SafeAreaView>

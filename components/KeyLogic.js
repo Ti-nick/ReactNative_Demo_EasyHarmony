@@ -14,7 +14,7 @@ export function getScaleNotes(key, scale){
 }
 
 // Function to get the intervals of a scale
-function getScaleIntervals(scale){
+export function getScaleIntervals(scale){
   switch(scale){
     case "Major":
       return [0, 2, 4, 5, 7, 9, 11];
@@ -23,6 +23,35 @@ function getScaleIntervals(scale){
     default:
       return [];
   }
+}
+
+// Function to get the harmony notes
+export function getHarmonyNotes(notes, scaleNotes, distance){
+    let harmonyNotes = [];
+    let noteIndex = 0;
+    // For example, if the distance is +3, the actual distance is 2
+    let actualDistance = distance - 1;
+    for(let i = 0; i < notes.length; i++){
+        let octave = notes[i][notes[i].length - 1];
+        let note = notes[i].substring(0, notes[i].length - 1);
+        let noteIndex = scaleNotes.indexOf(note);
+        // When the note is not in the scale, continuing shift to the next note until it reach a note within scale
+        while(noteIndex === -1){
+          let newNote = noteLogic[(noteLogic.indexOf(note) + 1) % 12];
+          noteIndex = scaleNotes.indexOf(newNote);
+          note = newNote;
+        }
+        // If the note is in the scale, add the harmony note
+        if(noteIndex + actualDistance < 7){
+            let newNoteIndex = (noteIndex + actualDistance) % 7;
+            harmonyNotes.push(scaleNotes[newNoteIndex] + octave);
+        // If the note is in the scale and the harmony note is in the next octave
+        }else{
+            let newNoteIndex = (noteIndex + actualDistance) % 7;
+            harmonyNotes.push(scaleNotes[newNoteIndex] + (parseInt(octave) + 1));
+        }
+    }
+    return harmonyNotes;
 }
 
 // Function to get the notes in a key
