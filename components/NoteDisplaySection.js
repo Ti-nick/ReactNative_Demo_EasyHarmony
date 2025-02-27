@@ -2,8 +2,9 @@ import { View } from 'react-native';
 import PlayButton from './buttoncomponent/PlayButton';
 import NoteMonitor from './NoteMonitor';
 import HarmonySelectButton from './buttoncomponent/HarmonySelectButton';
+import {getScaleNotes} from './KeyLogic';
 
-export default function NoteDisplaySection({noteRecorder})
+export default function NoteDisplaySection({noteRecorder, songKey})
 {
     return(
         <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>

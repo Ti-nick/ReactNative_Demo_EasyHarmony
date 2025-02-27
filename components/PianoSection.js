@@ -33,7 +33,7 @@ export default function PianoSection({setNoteRecorder, songKey, setSongKey})
                 </View>
                 
                 {/* Key Adjustment Section */}
-                <PianoSettingButton>{"Settings (Key: " + songKey + ")"}</PianoSettingButton>
+                <PianoSettingButton>{"Key: " + songKey}</PianoSettingButton>
             </View>
 
             {/* Piano Section */}

@@ -21,7 +21,7 @@ export default function App() {
       <StatusBar barStyle="light-content" backgroundColor="rgb(42, 40, 40)" />
 
       <MenuBarSection/>
-      <NoteDisplaySection noteRecorder={noteRecorder}/>
+      <NoteDisplaySection noteRecorder={noteRecorder} songKey={songKey}/>
       <PianoSection setNoteRecorder={setNoteRecorder} songKey={songKey} setSongKey={setSongKey}/>
       <RecordSection/>
       <NotePlayer/>
