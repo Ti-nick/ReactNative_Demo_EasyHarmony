@@ -13,10 +13,6 @@ export default function App() {
   const [songKey, setSongKey] = useState("C");
   const [songMajorMinor, setSongMajorMinor] = useState("Major");
 
-  // useEffect(() => {
-  //   setNoteConverter(noteRecorder);
-  // }, [noteRecorder]);
-
   return(
     <SafeAreaView style={styles.sectionContainer}>
       {/* Add the StatusBar with light content */}
