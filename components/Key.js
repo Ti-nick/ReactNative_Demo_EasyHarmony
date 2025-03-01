@@ -34,10 +34,12 @@ export default function Key({children, accidentalKeyPosition, accidentalKeyWidth
         playSound(children, setSound);
     }
 
-    const handlePressOut = () => {
+    const handlePressOut = async () => {
         setIsPress(false);
-        sound.stopAsync();
-        sound.unloadAsync();
+        if(sound){
+            await sound.stopAsync();
+            await sound.unloadAsync();
+        }
     }
 
  return (
