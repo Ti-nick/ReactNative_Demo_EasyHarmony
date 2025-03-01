@@ -1,11 +1,13 @@
 import { Text, View, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import styles from './styles.js';
+import { playSound } from './NotePlayer';
 
 
 export default function Key({children, accidentalKeyPosition, accidentalKeyWidth, accidental, active, setNoteRecorder}) {
 
     const [isPress, setIsPress] = useState(false);
+    const [sound, setSound] = useState();
 
     const keyStyle = [
         styles.key,
@@ -27,10 +29,21 @@ export default function Key({children, accidentalKeyPosition, accidentalKeyWidth
         });
     }
 
+    const handlePressIn = () => {
+        setIsPress(true);
+        playSound(children, setSound);
+    }
+
+    const handlePressOut = () => {
+        setIsPress(false);
+        sound.stopAsync();
+        sound.unloadAsync();
+    }
+
  return (
     <Pressable 
-        onPressIn={() => setIsPress(true)}
-        onPressOut={() => setIsPress(false)}
+        onPressIn={() => handlePressIn()}
+        onPressOut={() => handlePressOut()}
         onPress={handlePress}
         style = {keyStyle}
     >
