@@ -17,12 +17,12 @@ export default function NoteDisplaySection({noteRecorder, noteConverter, setNote
     return(
         <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
             <View style={{flexDirection: "row", height: "40%", width: "90%", margin: 5}}>
-                <PlayButton/>
+                <PlayButton notes={noteRecorder}/>
                 <NoteMonitor displayNotes={noteRecorder}/>
             </View>
 
             <View style={{flexDirection: "row", height: "40%", width: "90%", margin: 5}}>
-                <PlayButton/>
+                <PlayButton notes={noteConverter}/>
                 <NoteMonitor displayNotes={noteConverter}/>
                 <HarmonySelectButton/>
             </View>     

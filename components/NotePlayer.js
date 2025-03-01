@@ -1,6 +1,4 @@
 import { Audio } from 'expo-av';
-import { useEffect, useState } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
 
 const noteToFile = {
   "A0": require('../assets/acousticGrandPiano/A0.mp3'),
@@ -93,55 +91,24 @@ const noteToFile = {
   "G#7": require('../assets/acousticGrandPiano/G#7.mp3'),
 };
 
-export default function NotePlayer(){
-    const [sound, setSound] = useState();
-    const notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
-
-    async function playSound(note) {
-
-        console.log('Loading Sound');
-        try {
-            const { sound } = await Audio.Sound.createAsync(
-                noteToFile[note],
-                { shouldPlay: true }
-            );
-            setSound(sound);
-            console.log('Playing Sound');
-            // sound.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-            await sound.playAsync();
-        } catch (error) {
-            console.error('Error loading or playing sound:', error);
-        }
-    }
-
-    useEffect(() => {
-        return sound
-            ? () => {
-                console.log('Unloading Sound');
-                sound.unloadAsync();
-            }
-            : undefined;
-    }, [sound]);
-
-    async function playNotesSequentially(notes) {
-      for (const note of notes) {
-          await playSound(note);
-          await new Promise(resolve => setTimeout(resolve, 700)); // Wait for 1 second
-      }
-  }
-    
-      return (
-        <View style={styles.container}>
-          <Button title="Play Sound" onPress={() => {playNotesSequentially(notes)}} />
-        </View>
+export async function playSound(note, setSound) {
+  console.log('Loading Sound');
+  try {
+      const { sound } = await Audio.Sound.createAsync(
+          noteToFile[note],
+          { shouldPlay: true }
       );
+      setSound(sound);
+      console.log('Playing Sound');
+      await sound.playAsync();
+  } catch (error) {
+      console.error('Error loading or playing sound:', error);
+  }
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      backgroundColor: '#ecf0f1',
-      padding: 10,
-    },
-  });
+export async function playNotesSequentially(notes, setSound) {
+  for (const note of notes) {
+      await playSound(note, setSound);
+      await new Promise(resolve => setTimeout(resolve, 500)); // Wait for 1 second
+  }
+}

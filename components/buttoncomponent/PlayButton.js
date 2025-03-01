@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, Pressable, StyleSheet } from 'react-native';
 import { verticalScale} from 'react-native-size-matters';
+import { playNotesSequentially } from '../NotePlayer';
 
-export default function PlayButton()
+export default function PlayButton({notes})
 {
     const [isPress, setIsPress] = useState(false);
+    const [sound, setSound] = useState();
+
+    useEffect(() => {
+        return sound
+            ? () => {
+                console.log('Unloading Sound');
+                sound.unloadAsync();
+            }
+            : undefined;
+    }, [sound]);
 
     return(
         <Pressable 
             onPressIn={() => setIsPress(true)}
             onPressOut={() => setIsPress(false)}
+            onPress={() => playNotesSequentially(notes, setSound)}
             style={[styles.buttonContainer, isPress?{backgroundColor: "rgb(139 34 39)"}:null]}
         >
             <Text style={{color: "white", fontSize: verticalScale(12)}}>▶︎</Text>

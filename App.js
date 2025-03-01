@@ -3,7 +3,6 @@ import MenuBarSection from './components/MenuBarSection'
 import NoteDisplaySection from './components/NoteDisplaySection';
 import PianoSection from './components/PianoSection';
 import RecordSection from './components/RecordSection';
-import NotePlayer from './components/NotePlayer';
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -22,7 +21,6 @@ export default function App() {
       <NoteDisplaySection noteRecorder={noteRecorder} noteConverter={noteConverter} setNoteConverter={setNoteConverter} songKey={songKey} songMajorMinor={songMajorMinor}/>
       <PianoSection setNoteRecorder={setNoteRecorder} songKey={songKey} setSongKey={setSongKey}/>
       <RecordSection setNoteRecorder={setNoteRecorder}/>
-      <NotePlayer/>
       <View style={{flex: 0.4}}></View>
     </SafeAreaView>
   )
