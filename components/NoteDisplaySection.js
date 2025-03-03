@@ -12,18 +12,20 @@ export default function NoteDisplaySection({noteRecorder, noteConverter, setNote
         const currentScale = getScaleNotes(songKey, songMajorMinor);
         const harmonyNotes = getHarmonyNotes(noteRecorder, currentScale, 3);
         setNoteConverter(harmonyNotes);
+        console.log(noteRecorder);
+        console.log(harmonyNotes);
     }, [noteRecorder, songKey, songMajorMinor]);
 
     return(
         <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
             <View style={{flexDirection: "row", height: "40%", width: "90%", margin: 5}}>
-                <PlayButton notes={noteRecorder}/>
-                <NoteMonitor displayNotes={noteRecorder}/>
+                <PlayButton noteObjects={noteRecorder}/>
+                <NoteMonitor noteObjects={noteRecorder}/>
             </View>
 
             <View style={{flexDirection: "row", height: "40%", width: "90%", margin: 5}}>
-                <PlayButton notes={noteConverter}/>
-                <NoteMonitor displayNotes={noteConverter}/>
+                <PlayButton noteObjects={noteConverter}/>
+                <NoteMonitor noteObjects={noteConverter}/>
                 <HarmonySelectButton/>
             </View>     
         </View>

@@ -26,15 +26,15 @@ export function getScaleIntervals(scale){
 }
 
 // Function to get the harmony notes
-export function getHarmonyNotes(notes, scaleNotes, distance){
+export function getHarmonyNotes(noteObjects, scaleNotes, distance){
     let harmonyNotes = [];
-    let noteIndex = 0;
     // For example, if the distance is +3, the actual distance is 2
     let actualDistance = distance - 1;
-    for(let i = 0; i < notes.length; i++){
-        let octave = notes[i][notes[i].length - 1];
-        let note = notes[i].substring(0, notes[i].length - 1);
+    for(let i = 0; i < noteObjects.length; i++){
+        let octave = noteObjects[i].note[noteObjects[i].note.length - 1];
+        let note = noteObjects[i].note.substring(0, noteObjects[i].note.length - 1);
         let noteIndex = scaleNotes.indexOf(note);
+        let duration = noteObjects[i].duration;
         // When the note is not in the scale, continuing shift to the next note until it reach a note within scale
         while(noteIndex === -1){
           let newNote = noteLogic[(noteLogic.indexOf(note) + 1) % 12];
@@ -44,11 +44,11 @@ export function getHarmonyNotes(notes, scaleNotes, distance){
         // If the note is in the scale, add the harmony note
         if(noteIndex + actualDistance < 7){
             let newNoteIndex = (noteIndex + actualDistance) % 7;
-            harmonyNotes.push(scaleNotes[newNoteIndex] + octave);
+            harmonyNotes.push({ note: scaleNotes[newNoteIndex] + octave, duration: duration });
         // If the note is in the scale and the harmony note is in the next octave
         }else{
             let newNoteIndex = (noteIndex + actualDistance) % 7;
-            harmonyNotes.push(scaleNotes[newNoteIndex] + (parseInt(octave) + 1));
+            harmonyNotes.push({ note: scaleNotes[newNoteIndex] + (parseInt(octave) + 1), duration: duration });
         }
     }
     return harmonyNotes;

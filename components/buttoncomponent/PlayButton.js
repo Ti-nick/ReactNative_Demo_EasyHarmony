@@ -3,7 +3,7 @@ import { Text, Pressable, StyleSheet } from 'react-native';
 import { verticalScale} from 'react-native-size-matters';
 import { playNotesSequentially } from '../NotePlayer';
 
-export default function PlayButton({notes})
+export default function PlayButton({noteObjects})
 {
     const [isPress, setIsPress] = useState(false);
     const [sound, setSound] = useState();
@@ -21,7 +21,7 @@ export default function PlayButton({notes})
         <Pressable 
             onPressIn={() => setIsPress(true)}
             onPressOut={() => setIsPress(false)}
-            onPress={() => playNotesSequentially(notes, setSound)}
+            onPress={() => playNotesSequentially(noteObjects, setSound)}
             style={[styles.buttonContainer, isPress?{backgroundColor: "rgb(139 34 39)"}:null]}
         >
             <Text style={{color: "white", fontSize: verticalScale(12)}}>▶︎</Text>

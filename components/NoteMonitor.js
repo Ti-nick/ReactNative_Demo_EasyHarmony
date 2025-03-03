@@ -1,15 +1,16 @@
 import { Text, View } from 'react-native';
 import { verticalScale} from 'react-native-size-matters';
 import { StyleSheet } from 'react-native';
+import { useEffect } from 'react';
 
-export default function NoteMonitor({displayNotes})
+export default function NoteMonitor({noteObjects})
 {
+    const notesString = noteObjects ? noteObjects.map(item => item.note).join(', ') : '';
+
     return(
         <View style={styles.monitorContainer}>
             <Text style={styles.text} numberOfLines={1} ellipsizeMode='clip'>
-                {displayNotes.map((note, index) => (
-                    <Text key={index}>{note + ", "}</Text>
-                ))}
+                {notesString}
             </Text>
         </View>
     )

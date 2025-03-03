@@ -106,9 +106,9 @@ export async function playSound(note, setSound) {
   }
 }
 
-export async function playNotesSequentially(notes, setSound) {
-  for (const note of notes) {
-      await playSound(note, setSound);
-      await new Promise(resolve => setTimeout(resolve, 500)); // Wait for 1 second
+export async function playNotesSequentially(noteObjects, setSound) {
+  for (const item of noteObjects) {
+      await playSound(item.note, setSound);
+      await new Promise(resolve => setTimeout(resolve, item.duration)); // Wait for 1 second
   }
 }
