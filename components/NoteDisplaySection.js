@@ -12,8 +12,8 @@ export default function NoteDisplaySection({noteRecorder, noteConverter, setNote
         const currentScale = getScaleNotes(songKey, songMajorMinor);
         const harmonyNotes = getHarmonyNotes(noteRecorder, currentScale, 3);
         setNoteConverter(harmonyNotes);
-        console.log(noteRecorder);
-        console.log(harmonyNotes);
+        // console.log(noteRecorder);
+        // console.log(harmonyNotes);
     }, [noteRecorder, songKey, songMajorMinor]);
 
     return(

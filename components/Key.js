@@ -1,13 +1,12 @@
 import { Text, View, Pressable } from 'react-native';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './styles.js';
-import { playSound } from './NotePlayer';
+import { playSound, stopSound } from './NotePlayer';
 
 
 export default function Key({children, accidentalKeyPosition, accidentalKeyWidth, accidental, active, setNoteRecorder}) {
 
     const [isPress, setIsPress] = useState(false);
-    const [sound, setSound] = useState();
     let starttime = useRef(0);
     let endtime = useRef(0);
 
@@ -36,16 +35,13 @@ export default function Key({children, accidentalKeyPosition, accidentalKeyWidth
             ...prev,
             { note: children, duration: null } // Temporary duration placeholder
         ]);
-        console.log('Press Start Time: ', starttime.current);
-        playSound(children, setSound);
+        // console.log('Press Start Time: ', starttime.current);
+        playSound(children);
     }
 
-    const handlePressOut = async () => {
+    const handlePressOut = async() => {
         setIsPress(false);
-        if(sound){
-            await sound.stopAsync();
-            await sound.unloadAsync();
-        }
+        stopSound(children);
         endtime.current = Date.now();
         let duration = endtime.current - starttime.current;
         setNoteRecorder((prev) => {

@@ -1,4 +1,5 @@
 import { Audio } from 'expo-av';
+import { s } from 'react-native-size-matters';
 
 const noteToFile = {
   "A0": require('../assets/acousticGrandPiano/A0.mp3'),
@@ -52,7 +53,6 @@ const noteToFile = {
   "G5": require('../assets/acousticGrandPiano/G5.mp3'),
   "G6": require('../assets/acousticGrandPiano/G6.mp3'),
   "G7": require('../assets/acousticGrandPiano/G7.mp3'),
-
   "A#1": require('../assets/acousticGrandPiano/A#1.mp3'),
   "A#0": require('../assets/acousticGrandPiano/A#0.mp3'),
   "A#2": require('../assets/acousticGrandPiano/A#2.mp3'),
@@ -91,24 +91,56 @@ const noteToFile = {
   "G#7": require('../assets/acousticGrandPiano/G#7.mp3'),
 };
 
-export async function playSound(note, setSound) {
-  console.log('Loading Sound');
-  try {
+const soundPool = {};
+
+export async function preloadSounds(setLoadingProgress) {
+  console.log('Preloading sounds...');
+  const totalSounds = Object.keys(noteToFile).length;
+  let loadedSounds = 0;
+
+  const loadSoundPromises = Object.entries(noteToFile).map(async ([key, value]) => {
+    // console.log('Loading Sound:', key);
+    try {
       const { sound } = await Audio.Sound.createAsync(
-          noteToFile[note],
-          { shouldPlay: true }
+        value,
+        { shouldPlay: false }
       );
-      setSound(sound);
-      console.log('Playing Sound');
-      await sound.playAsync();
+      soundPool[key] = sound;
+      loadedSounds++;
+      setLoadingProgress(loadedSounds / totalSounds * 100);
+      // console.log(`Loaded sound for note: ${key}`);
+    } catch (error) {
+      console.error('Error loading sound:', error);
+    }
+  });
+  await Promise.all(loadSoundPromises);
+  console.log('Finished preloading sounds');
+}
+
+export async function playSound(note) {
+  const soundSource = soundPool[note];
+  // console.log('Loading Sound');
+  try {
+    soundSource.replayAsync();
+    // console.log('Playing Sound');
   } catch (error) {
-      console.error('Error loading or playing sound:', error);
+    console.error('Error playing sound:', error);
+  }
+}
+
+export async function stopSound(note) {
+  const soundSource = soundPool[note];
+  try {
+    soundSource.stopAsync();
+  } catch (error) {
+    console.error('Error stopping sound:', error);
   }
 }
 
 export async function playNotesSequentially(noteObjects, setSound) {
   for (const item of noteObjects) {
-      await playSound(item.note, setSound);
-      await new Promise(resolve => setTimeout(resolve, item.duration)); // Wait for 1 second
+      playSound(item.note, setSound);
+      await new Promise(resolve => setTimeout(resolve, item.duration));
+      stopSound(item.note, setSound);
   }
 }
