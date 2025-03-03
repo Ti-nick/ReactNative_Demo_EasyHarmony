@@ -98,22 +98,27 @@ export async function preloadSounds(setLoadingProgress) {
   const totalSounds = Object.keys(noteToFile).length;
   let loadedSounds = 0;
 
-  const loadSoundPromises = Object.entries(noteToFile).map(async ([key, value]) => {
-    // console.log('Loading Sound:', key);
+  for (const [key, value] of Object.entries(noteToFile)) {
     try {
-      const { sound } = await Audio.Sound.createAsync(
-        value,
-        { shouldPlay: false }
-      );
-      soundPool[key] = sound;
-      loadedSounds++;
-      setLoadingProgress(loadedSounds / totalSounds * 100);
-      // console.log(`Loaded sound for note: ${key}`);
+        // Stop and unload existing sound if already loaded
+        if (soundPool[key]) {
+            await soundPool[key].unloadAsync();
+        }
+
+        // Load new sound
+        const { sound } = await Audio.Sound.createAsync(value, { shouldPlay: false });
+        soundPool[key] = sound;
+        
+        // Update loading progress
+        loadedSounds++;
+        setLoadingProgress((loadedSounds / totalSounds) * 100);
+
+        console.log(`Loaded sound: ${key}`);
     } catch (error) {
-      console.error('Error loading sound:', error);
+        console.error(`Error loading sound for ${key}:`, error);
     }
-  });
-  await Promise.all(loadSoundPromises);
+  }
+
   console.log('Finished preloading sounds');
 }
 
@@ -121,8 +126,8 @@ export async function playSound(note) {
   const soundSource = soundPool[note];
   // console.log('Loading Sound');
   try {
-    soundSource.replayAsync();
-    // console.log('Playing Sound');
+    await soundSource.replayAsync();
+    console.log('Playing Sound');
   } catch (error) {
     console.error('Error playing sound:', error);
   }

@@ -28,10 +28,6 @@ export default function PianoSection({setNoteRecorder, songKey, setSongKey})
         }
     }
 
-    useEffect(() => {
-        console.log(octave);
-    }, [octave]);
-
     return(
         <View style={{flex:6}}>
             {/* Setting Section */}

@@ -30,11 +30,11 @@ export default function App() {
     return(
       <SafeAreaView style={{flex: 1, backgroundColor: 'rgb(42, 40, 40)', alignItems: 'center', justifyContent: 'center'}}>
         <Text style={{color: 'white', fontSize: 20}}>Loading Sounds...</Text>
-        <Text style={{color: 'white', fontSize: 20}}>{loadingProgress}%</Text>
+        <Text style={{color: 'white', fontSize: 20}}>{Math.round(loadingProgress)}%</Text>
       </SafeAreaView>
     )
   }
-  
+
   return(
     <SafeAreaView style={styles.sectionContainer}>
       {/* Add the StatusBar with light content */}
